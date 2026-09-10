@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Xiaomi 13 Ultra (ishtar) on AOSPA beryl (Android 16).
+
+  INCOMPLETE: this manifest does not build yet. README.md lists the open items.
+  Every revision is a full commit id; `upstream` names the branch it lives on.
+  Run `python3 check.py` after any change.
+-->
+<manifest>
+  <remote name="ishtar-github" fetch="https://github.com" />
+
+  <!-- Device trees -->
+  <project path="device/xiaomi/ishtar"
+           name="ahmetxa/android_device_xiaomi_ishtar"
+           remote="ishtar-github"
+           revision="d48816fb14984939f7152106f5352536619999b2"
+           upstream="beryl" />
+  <project path="device/xiaomi/sm8550-common"
+           name="xiaomi-8550/android_device_xiaomi_sm8550-common"
+           remote="ishtar-github"
+           revision="a0a7042263ff429afce199a945e50a9279f19822"
+           upstream="beryl" />
+
+  <!-- Vendor blobs -->
+  <project path="vendor/xiaomi/ishtar"
+           name="xiaomi-8550/proprietary_vendor_xiaomi_ishtar"
+           remote="ishtar-github"
+           revision="f92e7a907d4e46f65f2ffca2efc24f227e07a28a"
+           upstream="beryl" />
+  <project path="vendor/xiaomi/sm8550-common"
+           name="xiaomi-8550/proprietary_vendor_xiaomi_sm8550-common"
+           remote="ishtar-github"
+           revision="e0d20e8f29042e07ab778accab444bbbd4fb6040"
+           upstream="beryl" />
+</manifest>

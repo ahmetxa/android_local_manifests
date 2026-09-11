@@ -2,34 +2,113 @@
 <!--
   Xiaomi 13 Ultra (ishtar) on AOSPA beryl (Android 16).
 
-  INCOMPLETE: this manifest does not build yet. README.md lists the open items.
-  Every revision is a full commit id; `upstream` names the branch it lives on.
+  Base: AOSPA/manifest beryl at 7dfc0650e27ec43b1d5cedf5e74213cf8667f2c2.
+
+  AOSPA's lunch runs barista, which blends vendor/aospa/products/ishtar/beans.xml
+  (still on vauxite branches) into .repo/local_manifests/baristablend.xml. This
+  file loads after it: each <remove-project> drops a beans project and the
+  <project> below it pins the beryl-era source instead. Beans projects not
+  named here come from barista unchanged. README.md gives the source for every
+  choice. Every revision is a full commit id; `upstream` names its branch.
   Run `python3 check.py` after any change.
 -->
 <manifest>
   <remote name="ishtar-github" fetch="https://github.com" />
+  <remote name="ishtar-gitlab" fetch="https://gitlab.com" />
 
   <!-- Device trees -->
+  <remove-project path="device/xiaomi/ishtar" optional="true" />
   <project path="device/xiaomi/ishtar"
            name="ahmetxa/android_device_xiaomi_ishtar"
            remote="ishtar-github"
            revision="d48816fb14984939f7152106f5352536619999b2"
            upstream="beryl" />
+  <remove-project path="device/xiaomi/sm8550-common" optional="true" />
   <project path="device/xiaomi/sm8550-common"
            name="xiaomi-8550/android_device_xiaomi_sm8550-common"
            remote="ishtar-github"
            revision="a0a7042263ff429afce199a945e50a9279f19822"
            upstream="beryl" />
 
-  <!-- Vendor blobs -->
+  <!-- Xiaomi hardware and sepolicy (open items 1 and 2) -->
+  <remove-project path="hardware/xiaomi" optional="true" />
+  <project path="hardware/xiaomi"
+           name="AOSPA/android_hardware_xiaomi"
+           remote="ishtar-github"
+           revision="1a3e75d36079e8ba9d1b324acdf5201157a307a6"
+           upstream="beryl" />
+  <remove-project path="device/xiaomi/sepolicy" optional="true" />
+  <project path="device/xiaomi/sepolicy"
+           name="AOSPA/android_device_xiaomi_sepolicy"
+           remote="ishtar-github"
+           revision="8dcddf5ef0402c373431696e4589c59d55a51740"
+           upstream="beryl" />
+
+  <!-- Kernel, built inline from kernel_platform (open item 3) -->
+  <remove-project path="kernel_platform/msm-kernel" optional="true" />
+  <project path="kernel_platform/msm-kernel"
+           name="xiaomi-8550/android_kernel_xiaomi_sm8550"
+           remote="ishtar-github"
+           revision="1c509b39a15692c9cfadbdd0d9154cc52f068254"
+           upstream="beryl" />
+  <remove-project path="kernel_platform/common" optional="true" />
+  <project path="kernel_platform/common"
+           name="xiaomi-8550/android_kernel_qcom_sm8550"
+           remote="ishtar-github"
+           revision="b11e56025b7f8ae115189d38afcc85d16d84aac6"
+           upstream="beryl">
+    <linkfile src="." dest=".source_date_epoch_dir" />
+  </project>
+  <remove-project path="vendor/qcom/opensource/display-drivers" optional="true" />
+  <project path="vendor/qcom/opensource/display-drivers"
+           name="xiaomi-8550/vendor_qcom_opensource_display-drivers"
+           remote="ishtar-github"
+           revision="c9c51bab11e6855adddb83b19e649b42396494d5"
+           upstream="xiaomi-8550">
+    <linkfile src="display_driver_product.mk" dest="vendor/qcom/defs/product-defs/vendor/display_driver_product.mk" />
+    <linkfile src="display_driver_board.mk" dest="vendor/qcom/defs/board-defs/vendor/display_driver_board.mk" />
+  </project>
+
+  <!-- QCOM display and audio HALs (open item 4) -->
+  <remove-project path="hardware/qcom/display" optional="true" />
+  <project path="hardware/qcom/display"
+           name="xiaomi-8550/android_hardware_qcom_display"
+           remote="ishtar-github"
+           revision="bd3c17848e939d99707f5bfd2b7b6dcd1fb08863"
+           upstream="beryl-8550" />
+  <remove-project path="vendor/qcom/opensource/audio-hal/primary-hal" optional="true" />
+  <project path="vendor/qcom/opensource/audio-hal/primary-hal"
+           name="xiaomi-8550/android_hardware_qcom_audio"
+           remote="ishtar-github"
+           revision="7c4ef02ccfe63f3288ce4701736c27fac40f4a3b"
+           upstream="beryl-8550" />
+  <remove-project path="vendor/qcom/opensource/pal" optional="true" />
+  <project path="vendor/qcom/opensource/pal"
+           name="xiaomi-8550/android_vendor_qcom_opensource_arpal-lx"
+           remote="ishtar-github"
+           revision="5b305caa5cea49a73fe99c3fc11ea44b7a39a5b3"
+           upstream="beryl-8550" />
+
+  <!-- Vendor blobs, shallow like AOSPA's own beans (open items 5 and 7) -->
+  <remove-project path="vendor/xiaomi/ishtar" optional="true" />
   <project path="vendor/xiaomi/ishtar"
            name="xiaomi-8550/proprietary_vendor_xiaomi_ishtar"
            remote="ishtar-github"
            revision="f92e7a907d4e46f65f2ffca2efc24f227e07a28a"
-           upstream="beryl" />
+           upstream="beryl"
+           clone-depth="1" />
+  <remove-project path="vendor/xiaomi/sm8550-common" optional="true" />
   <project path="vendor/xiaomi/sm8550-common"
            name="xiaomi-8550/proprietary_vendor_xiaomi_sm8550-common"
            remote="ishtar-github"
            revision="e0d20e8f29042e07ab778accab444bbbd4fb6040"
-           upstream="beryl" />
+           upstream="beryl"
+           clone-depth="1" />
+  <remove-project path="vendor/xiaomi/camera" optional="true" />
+  <project path="vendor/xiaomi/camera"
+           name="ThankYouMario/proprietary_vendor_xiaomi_camera"
+           remote="ishtar-gitlab"
+           revision="b87ebc1c170da580945640015efd1ebe3f0f3999"
+           upstream="beryl-sm8550-leica"
+           clone-depth="1" />
 </manifest>

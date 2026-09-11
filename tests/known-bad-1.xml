@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote name="ishtar-github" fetch="https://github.com" />
+  <remote name="elsewhere" fetch="https://bitbucket.org" />
+  <project path="bad/altered-commit" name="ahmetxa/android_device_xiaomi_ishtar" remote="ishtar-github"
+           revision="d48816fb14984939f7152106f5352536619999b3" upstream="beryl" />
+  <project path="bad/missing-branch" name="xiaomi-8550/android_device_xiaomi_sm8550-common" remote="ishtar-github"
+           revision="a0a7042263ff429afce199a945e50a9279f19822" upstream="no-such-branch" />
+  <project path="bad/not-on-branch" name="ahmetxa/android_device_xiaomi_ishtar" remote="ishtar-github"
+           revision="d48816fb14984939f7152106f5352536619999b2" upstream="vauxite" />
+  <project path="bad/branch-as-revision" name="xiaomi-8550/proprietary_vendor_xiaomi_sm8550-common" remote="ishtar-github"
+           revision="beryl" upstream="beryl" />
+  <project path="bad/non-github-remote" name="xiaomi-8550/proprietary_vendor_xiaomi_ishtar" remote="elsewhere"
+           revision="f92e7a907d4e46f65f2ffca2efc24f227e07a28a" upstream="beryl" />
+</manifest>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote name="ishtar-github" fetch="https://github.com" />
+  <remote name="ishtar-gitlab" fetch="https://gitlab.com" />
+  <remote name="elsewhere" fetch="https://bitbucket.org" />
+
+  <!-- GitLab: altered commit id -->
+  <project path="bad/gitlab-altered-commit" name="ThankYouMario/proprietary_vendor_xiaomi_camera" remote="ishtar-gitlab"
+           revision="b87ebc1c170da580945640015efd1ebe3f0f3990" upstream="beryl-sm8550-leica" />
+  <!-- GitLab: commit exists but not on the named branch -->
+  <project path="bad/gitlab-not-on-branch" name="ThankYouMario/proprietary_vendor_xiaomi_camera" remote="ishtar-gitlab"
+           revision="b87ebc1c170da580945640015efd1ebe3f0f3999" upstream="vauxite-sm8550-leica" />
+  <!-- GitLab: missing branch -->
+  <project path="bad/gitlab-missing-branch" name="ThankYouMario/proprietary_vendor_xiaomi_camera" remote="ishtar-gitlab"
+           revision="b87ebc1c170da580945640015efd1ebe3f0f3999" upstream="no-such-branch" />
+  <!-- Unsupported host -->
+  <project path="bad/unsupported-host" name="xiaomi-8550/proprietary_vendor_xiaomi_ishtar" remote="elsewhere"
+           revision="f92e7a907d4e46f65f2ffca2efc24f227e07a28a" upstream="beryl" />
+  <!-- remove-project without optional="true" -->
+  <remove-project path="device/xiaomi/sepolicy" />
+  <!-- remove-project by name only -->
+  <remove-project name="AOSPA/android_hardware_xiaomi" optional="true" />
+  <!-- remove-project with no replacement after it -->
+  <remove-project path="vendor/qcom/opensource/pal" optional="true" />
+  <!-- beans path pinned without removing barista's project first (the removal above is invalid) -->
+  <project path="device/xiaomi/sepolicy" name="AOSPA/android_device_xiaomi_sepolicy" remote="ishtar-github"
+           revision="8dcddf5ef0402c373431696e4589c59d55a51740" upstream="beryl" />
+  <!-- same path twice in one file -->
+  <project path="bad/twice" name="AOSPA/android_device_xiaomi_sepolicy" remote="ishtar-github"
+           revision="8dcddf5ef0402c373431696e4589c59d55a51740" upstream="beryl" />
+  <project path="bad/twice" name="AOSPA/android_device_xiaomi_sepolicy" remote="ishtar-github"
+           revision="8dcddf5ef0402c373431696e4589c59d55a51740" upstream="beryl" />
+</manifest>
